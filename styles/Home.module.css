@@ -56,6 +56,13 @@
   font-size: 1.5rem;
 }
 
+.title2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0% 25%;;
+}
+
 .code {
   background: #fafafa;
   border-radius: 5px;
@@ -68,9 +75,10 @@
 .grid {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  width: 300px;
+  left: 50%;
+  justify-content: space-between;
 }
 
 .card {
@@ -82,14 +90,15 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  max-width: 500px;
+  font-size: 0.8em
 }
 
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #6f7173;
+  border-color: #6f7173;
 }
 
 .card h2 {
@@ -106,6 +115,17 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+.pointbtn {
+  width:100px;
+  height:25px;
+}
+
+.inputbox {
+  display:flex;
+  gap: 5px;
+  flex-direction: column;
 }
 
 @media (max-width: 600px) {
