@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "planning-poker",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mongodb": "^4.11.0",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "eslint": "8.23.1",
+    "eslint": "8.25.0",
     "eslint-config-next": "12.3.1"
   }
 }
