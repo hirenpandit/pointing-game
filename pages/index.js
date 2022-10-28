@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 
 import {useState, useEffect, useRef} from 'react'
 import { useRouter } from 'next/router'
+import { getSession, postRequest, putRequest } from '../lib/request'
 
 export default function Home() {
 
@@ -19,7 +20,11 @@ export default function Home() {
     const sessionid = urlParams.get('sessionid');
     if(sessionid) {
       isCreate(false)
-      setTeam(sessionStorage.getItem('team')) // instead of session storage get from the db based on sessionid
+      getSession(sessionid).then(res => {
+        console.log(`res: ${res}`)
+        sessionStorage.setItem('team', res.team)
+        setTeam(res.team) 
+      })
     }
   },[])
 
@@ -50,39 +55,6 @@ export default function Home() {
       router.push(`/table?sessionid=${id}`)
     }).catch(e => console.error(e))
     
-  }
-
-  const postRequest = async (team, name) => {
-    return await fetch(`/api/game`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        team: team,
-        devs:
-        [
-          {
-            name: name,
-            isAdmin: true
-          }  
-        ],
-      })
-    }).then(res => res.json())
-  }
-
-  const putRequest = async (id, team, name) => {
-    return await fetch(`/api/game/${id}`, {
-      method: 'PUT',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        _id: id,
-        team: team,
-        dev: pName,
-      })
-    }).then(res => res.json())
   }
 
   return (
