@@ -7,15 +7,16 @@ export default async function game(req, res){
 
     if(req.method === 'POST'){
         console.log(`creating new session`)
+        const objToInsert = req.body
+        let id = null
         db.collection('games')
-        .insertOne(req.body)
-
-        await res.status('200').json({
-            message: 'created new session'
-        })
-    } else if(req.method === 'PUT') {
-        console.log(`adding new devs to session`)
+            .insertOne(objToInsert)
+            .then(result => {           
+                id = result.insertedId.toHexString()
+                res.status(200).json({
+                    message: 'created new session',
+                    _id: id
+                })
+            })
     }
-
-    
 }

@@ -34,26 +34,31 @@ export default function Home() {
   }, [team, pName])
 
   const newSession = () => {
-    const sessionid = Date.now()
-    sessionStorage.setItem('id', sessionid)
     sessionStorage.setItem('team', team)
     sessionStorage.setItem('name', pName)
-    const res = postRequest(sessionid, team, pName)
-    if(res.status === '200') {
-      router.push(`/table?sessionid=${sessionid}`)
-    } else {
-      alert(`Not able to create`)
-    }
+    postRequest(team, pName).then(res => {
+      console.log(`response: ${res}`)
+      sessionStorage.setItem('id',res._id)
+      router.push(`/table?sessionid=${res._id}`)
+    })
+    
+  }
+  const joinSession = () => {
+    const id = sessionStorage.getItem('id')
+    putRequest(id, team, pName).then(res => {
+      console.log(`response: ${res}`)
+      router.push(`/table?sessionid=${id}`)
+    }).catch(e => console.error(e))
+    
   }
 
-  const postRequest = async (id, team, name) => {
-    const res = await fetch('/api/game', {
+  const postRequest = async (team, name) => {
+    return await fetch(`/api/game`, {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        id: id,
         team: team,
         devs:
         [
@@ -63,41 +68,21 @@ export default function Home() {
           }  
         ],
       })
-    })
-    console.log(`respnse status: ${res.status}`)
-    return res
+    }).then(res => res.json())
   }
 
   const putRequest = async (id, team, name) => {
-    const res = await fetch('/api/game', {
+    return await fetch(`/api/game/${id}`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        id: id,
+        _id: id,
         team: team,
-        devs:
-        [
-          {
-            name: name,
-            isAdmin: false
-          }  
-        ],
+        dev: pName,
       })
-    })
-    console.log(`respnse status: ${res.status}`)
-    return res
-  }
-
-  const joinSession = () => {
-    const id = sessionStorage.getItem('id')
-    const res = putRequest(id, team, pName)
-    if(res.status === '200') {
-      router.push(`/table?sessionid=${id}`)
-    } else {
-      alert(`Not able to join`)
-    }
+    }).then(res => res.json())
   }
 
   return (
