@@ -21,9 +21,6 @@ export default function Game(props){
         }
         const session = await getSession(sessionid)
         const id = sessionStorage.getItem('id')
-        console.log(`session detail id: ${session._id} 
-                        team: ${session.team} 
-                        devs: ${session.devs}`)
         if(id !== sessionid) {
             sessionStorage.setItem('id', sessionid)
             router.push({

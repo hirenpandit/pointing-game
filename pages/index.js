@@ -21,7 +21,6 @@ export default function Home() {
     if(sessionid) {
       isCreate(false)
       getSession(sessionid).then(res => {
-        console.log(`res: ${res}`)
         sessionStorage.setItem('team', res.team)
         setTeam(res.team) 
       })
@@ -42,7 +41,6 @@ export default function Home() {
     sessionStorage.setItem('team', team)
     sessionStorage.setItem('name', pName)
     postRequest(team, pName).then(res => {
-      console.log(`response: ${res}`)
       sessionStorage.setItem('id',res._id)
       router.push(`/table?sessionid=${res._id}`)
     })
@@ -51,7 +49,7 @@ export default function Home() {
   const joinSession = () => {
     const id = sessionStorage.getItem('id')
     putRequest(id, team, pName).then(res => {
-      console.log(`response: ${res}`)
+      sessionStorage.setItem('name', pName)
       router.push(`/table?sessionid=${id}`)
     }).catch(e => console.error(e))
     

@@ -6,7 +6,6 @@ export default async function game(req, res){
     const db = client.db('planning_poker')
 
     if(req.method === 'POST'){
-        console.log(`creating new session`)
         const objToInsert = req.body
         let id = null
         db.collection('games')
