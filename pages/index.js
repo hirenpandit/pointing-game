@@ -66,17 +66,17 @@ export default function Home() {
 
       <main className={styles.main}>
         <div>
-            <div className={styles.inputbox}>
-              <label value="Team" name="Team">Team</label>
+            <div className={styles.newsession}>
               <input type="text" 
-                    label="Name" 
+                    label="Team"
+                    placeholder='Team' 
                     id="session-name-txt" 
                     onChange={(e) => setTeam(e.target.value)}
                     value={team}
                     disabled={!create}/>
-              <label value="Name" name="Name">Name</label>
               <input type="text" 
-                    label="Name" 
+                    label="Name"
+                    placeholder='Your Name' 
                     id="session-name-txt" 
                     onChange={(e) => setName(e.target.value)}
                     value={pName}/>
