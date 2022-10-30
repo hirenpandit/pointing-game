@@ -3,6 +3,7 @@ import Point from './point'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
 import { getSession } from '../lib/request'
+import PointSelect from './point-select'
 
 export default function Game(props){
     const [devs, setDevs] = useState([])
@@ -30,7 +31,12 @@ export default function Game(props){
                 }
             })
         } else {
-            const names = session.devs.map(dev => dev.name)
+            const names = session.devs.map(dev => {
+                return {
+                    name: dev.name,
+                    point: dev.point ? dev.point : 0,
+                }
+            })
             setDevs(names)
         }
     }
@@ -42,18 +48,23 @@ export default function Game(props){
     }
 
     return( devs && 
-        <div className={styles.description}>
-            Get started by pointing stories !
-            <div className={styles.title}>
-                <code>{props.name}</code>
+        <div className={styles.pointsview}>
+            <div className={styles.description}>
+                Get started by pointing stories !
+                <div className={styles.title}>
+                    <code>{props.name}</code>
+                </div>
+                <div className={styles.card}>
+                    {
+                        devs.map(d => <Point key={d.name} player={d.name} point={d.point} show={show}/>)
+                    }
+                </div>
+                <button onClick={showhide}>Show Votes</button>
             </div>
-            <div className={styles.card}>
-                {
-                    devs.map(n => <Point key={n} player={n} point={1} show={show}/>)
-                }
-            </div>
-            <button onClick={showhide}>Show Votes</button>
-        </div> 
+            <div>
+                <PointSelect />
+            </div> 
+        </div>
         
     )
 }

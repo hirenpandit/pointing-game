@@ -128,6 +128,29 @@
   flex-direction: column;
 }
 
+.pointsview {
+  display:flex;
+  flex-direction: row;
+  gap: 5rem;
+}
+
+.pointslector {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pointslector button {
+  background-color: powderblue;
+  padding: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.pointslectorheading {
+  margin-top: 4rem;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
