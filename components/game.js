@@ -58,7 +58,7 @@ export default function Game(props){
             <div className={styles.selectionView}>
                 <div className={styles.title}>Get started by pointing stories !</div>
                 <div className={styles.title}>
-                    <code>{team}</code>
+                    {team}
                 </div>
                 <div className={styles.card}>
                     {

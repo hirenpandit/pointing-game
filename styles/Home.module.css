@@ -10,13 +10,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Raleway', sans-serif;
 }
 
 .newsession {
   display:flex;
   flex-direction: column;
   gap: 0.2rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .newsession input {
@@ -24,12 +24,14 @@
   width: 20rem;
   border-radius: 5px;
   border: 1px solid grey;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .newsession button {
   line-height: 2rem;
   border-radius: 5px;
   border: 1px solid grey;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .pointsview {
@@ -37,32 +39,38 @@
   align-items: start;
   justify-content: center;
   gap: 5rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .selectionView {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .title {
   font-size:2rem;
+  font-family: 'Quicksand', sans-serif;
 }
 .card {
   border: 1px solid lightgrey;
   border-radius: 5px;
   padding: 1rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .grid {
   display: flex;
   gap: 5rem;
   padding:0.4em;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .grid .name {
   width: 15rem;
   padding-top:0.3rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .grid button {
@@ -95,6 +103,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .grid button:hover{
@@ -106,6 +115,7 @@
   display: flex;
   gap: 0.5rem;
   margin: 1.5rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .action button {
@@ -121,6 +131,7 @@
   outline: 0;
   padding: 10px 25px;
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .action button:hover {
@@ -130,6 +141,7 @@
 
 .pointSelectionView{
   width: 30rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .selection{
@@ -137,12 +149,14 @@
   flex-direction: column;
   gap:1.2rem;
   margin: 5rem 0 0 0;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .point {
   display: flex;
   gap: 0.3rem;
   flex-wrap: wrap;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .point button {
@@ -158,6 +172,7 @@
   outline: 0;
   padding: 10px 25px;
   text-align: center;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .point button:hover {
