@@ -15,13 +15,15 @@ export default function PointSelect(){
 
     return (
         <>  
-            <div className={styles.pointslectorheading}>Select Point</div>
-            <div className={styles.pointslector}>
-            {
-                points.map(elem => {
-                    return <button key={elem} onClick={savePoint} value={elem}>{elem}</button>
-                })
-            }
+            <div className={styles.selection}>
+                <div className={styles.selectHeading}>Select Point</div>
+                <div className={styles.point}>
+                {
+                    points.map(elem => {
+                        return <button key={elem} onClick={savePoint} value={elem}>{elem}</button>
+                    })
+                }
+                </div>
             </div>
         </>
     )

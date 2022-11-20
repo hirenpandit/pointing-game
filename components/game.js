@@ -70,7 +70,7 @@ export default function Game(props){
                     <button onClick={clear}>Reset</button>
                 </div>
             </div>
-            <div>
+            <div className={styles.pointSelectionView}>
                 <PointSelect />
             </div> 
         </div>
