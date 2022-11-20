@@ -3,7 +3,7 @@ export default function Point({player, point, show}){
     return(
         <>
             <div className={styles.grid}>
-                <span>{player}</span>
+                <div className={styles.name}>{player}</div>
                 {show && 
                     <button className={styles.pointbtn}>{point}</button>
                 }

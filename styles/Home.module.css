@@ -10,6 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Raleway', sans-serif;
 }
 
 .newsession {
@@ -29,6 +30,54 @@
   line-height: 2rem;
   border-radius: 5px;
   border: 1px solid grey;
+}
+
+.pointsview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.selectionView {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size:2rem;
+}
+.card {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.grid {
+  display: flex;
+  gap: 5rem;
+  padding:0.4em;
+}
+
+.grid .name {
+  width: 15rem;
+}
+
+.grid button {
+  width: 5em;
+  height: 1.4rem;
+}
+
+.action {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.5rem;
+}
+
+.action button {
+  width: 5em;
+  height: 1.4rem;
 }
 
 .newsession input:focus {
