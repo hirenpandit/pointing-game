@@ -1,5 +1,9 @@
+import {useState, useEffect} from 'react'
 import { updatePoints } from '../lib/request'
+import { io } from 'socket.io-client'
 import styles from '../styles/Home.module.css'
+
+let socket
 
 function savePoint(e) {
     const point = e.target.value
@@ -8,10 +12,26 @@ function savePoint(e) {
     updatePoints(id, name, point)
         .then(res => console.log(res))
 
+    socket.emit('point-update', point)
+
 }
 
+const points = [1,2,3,5,8,13,21,'☕']
+
 export default function PointSelect(){
-    const points = [1,2,3,5,8,13,21,'☕']
+
+    useEffect(()=>{
+        socketInitializer()
+    },[])
+
+    const socketInitializer = async () => {
+        await fetch('/api/socket')
+        socket = io()
+
+        socket.on('connect', () => {
+            console.log(`connected`)
+        })
+    }
 
     return (
         <>  

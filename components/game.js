@@ -62,7 +62,12 @@ export default function Game(props){
                 </div>
                 <div className={styles.card}>
                     {
-                        devs.map(d => <Point key={d.name} player={d.name} point={d.point} show={show}/>)
+                        devs.map(
+                            d => <Point key={d.name} 
+                                        player={d.name} 
+                                        pts={d.point} 
+                                        show={show}/>
+                        )
                     }
                 </div>
                 <div className={styles.action}>
