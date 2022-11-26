@@ -8,6 +8,7 @@ import PointSelect from './point-select'
 export default function Game(props){
     const [devs, setDevs] = useState([])
     const [show, setShow] = useState(false)
+    const [team, setTeam] = useState("")
     const router = useRouter()
 
     useEffect(()=>{
@@ -38,6 +39,7 @@ export default function Game(props){
                 }
             })
             setDevs(names)
+            setTeam(session.team)
         }
     }
 
@@ -47,21 +49,28 @@ export default function Game(props){
         })
     }
 
+    const clear = () => {
+        console.log(`clearing`)
+    }
+
     return( devs && 
         <div className={styles.pointsview}>
-            <div className={styles.description}>
-                Get started by pointing stories !
+            <div className={styles.selectionView}>
+                <div className={styles.title}>Get started by pointing stories !</div>
                 <div className={styles.title}>
-                    <code>{props.name}</code>
+                    {team}
                 </div>
                 <div className={styles.card}>
                     {
                         devs.map(d => <Point key={d.name} player={d.name} point={d.point} show={show}/>)
                     }
                 </div>
-                <button onClick={showhide}>Show Votes</button>
+                <div className={styles.action}>
+                    <button onClick={showhide}>Show</button>
+                    <button onClick={clear}>Reset</button>
+                </div>
             </div>
-            <div>
+            <div className={styles.pointSelectionView}>
                 <PointSelect />
             </div> 
         </div>

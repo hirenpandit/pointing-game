@@ -12,6 +12,178 @@
   align-items: center;
 }
 
+.newsession {
+  display:flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.newsession input {
+  line-height: 2rem;
+  width: 20rem;
+  border-radius: 5px;
+  border: 1px solid grey;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.newsession button {
+  line-height: 2rem;
+  border-radius: 5px;
+  border: 1px solid grey;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.pointsview {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 5rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.selectionView {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.title {
+  font-size:2rem;
+  font-family: 'Quicksand', sans-serif;
+}
+.card {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 1rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.grid {
+  display: flex;
+  gap: 5rem;
+  padding:0.4em;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.grid .name {
+  width: 15rem;
+  padding-top:0.3rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.grid button {
+  width: 5em;
+  height: 1.7rem;
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  /* line-height: 23px; */
+  outline: none;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.grid button:hover{
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.action {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.5rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.action button {
+  background-color: #2f80ed;
+  border: 1px solid #2f80ed;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.action button:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+.pointSelectionView{
+  width: 30rem;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.selection{
+  display: flex;
+  flex-direction: column;
+  gap:1.2rem;
+  margin: 5rem 0 0 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.point {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.point button {
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.point button:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+.newsession input:focus {
+  border: 1px solid green;
+}
+
 .footer {
   display: flex;
   flex: 1;
@@ -27,130 +199,6 @@
   align-items: center;
   flex-grow: 1;
 }
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.title2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0% 25%;;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 300px;
-  left: 50%;
-  justify-content: space-between;
-}
-
-.card {
-  margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 500px;
-  font-size: 0.8em
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #6f7173;
-  border-color: #6f7173;
-}
-
-.card h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
-}
-
-.pointbtn {
-  width:100px;
-  height:25px;
-}
-
-.inputbox {
-  display:flex;
-  gap: 5px;
-  flex-direction: column;
-}
-
-.pointsview {
-  display:flex;
-  flex-direction: row;
-  gap: 5rem;
-}
-
-.pointslector {
-  display: flex;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.pointslector button {
-  background-color: powderblue;
-  padding: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.pointslectorheading {
-  margin-top: 4rem;
-}
-
 @media (max-width: 600px) {
   .grid {
     width: 100%;
