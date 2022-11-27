@@ -3,7 +3,7 @@ import { io } from 'socket.io-client'
 import styles from '../styles/Home.module.css'
 
 
-export default function Point({player, pts, show}){
+export default function Point({player, pts, show, id}){
 
     let socket
     const [point, setPoint] = useState(pts)
@@ -13,16 +13,20 @@ export default function Point({player, pts, show}){
     }, [])
 
     const socketInitializer = async () => {
-        await fetch('/api/socket')
+        console.log(`connecting at socket url: /api/socket/${id}`)
+        await fetch(`/api/socket/${id}`)
         socket = io()
 
         socket.on('connect', () => {
             console.log(`connected`)
         })
 
-        socket.on('update-point', point=>{
-            console.log(`point updated to: ${point}`)
-            setPoint(point)
+        socket.emit('join', {id: id})
+
+        socket.on('update-point', data=>{
+            if(player === data.name) {
+                setPoint(data.point)
+            }
         })
     }
     

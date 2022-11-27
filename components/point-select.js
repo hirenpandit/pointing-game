@@ -12,7 +12,7 @@ function savePoint(e) {
     updatePoints(id, name, point)
         .then(res => console.log(res))
 
-    socket.emit('point-update', point)
+    socket.emit('point-update', {id: id, name: name, point: point})
 
 }
 
@@ -25,7 +25,8 @@ export default function PointSelect(){
     },[])
 
     const socketInitializer = async () => {
-        await fetch('/api/socket')
+        const id = sessionStorage.getItem('id')
+        await fetch(`/api/socket/${id}`)
         socket = io()
 
         socket.on('connect', () => {

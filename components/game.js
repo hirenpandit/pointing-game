@@ -9,6 +9,7 @@ export default function Game(){
     const [devs, setDevs] = useState([])
     const [show, setShow] = useState(false)
     const [team, setTeam] = useState("")
+    const [id, setId] = useState()
     const router = useRouter()
 
     useEffect(()=>{
@@ -37,6 +38,7 @@ export default function Game(){
             })
             setDevs(names)
             setTeam(session.team)
+            setId(sessionid)
         }
     }
 
@@ -63,7 +65,8 @@ export default function Game(){
                             d => <Point key={d.name} 
                                         player={d.name} 
                                         pts={d.point} 
-                                        show={show}/>
+                                        show={show}
+                                        id={id}/>
                         )
                     }
                 </div>
