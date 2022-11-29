@@ -5,23 +5,20 @@ import { useRouter } from 'next/router'
 import { getSession } from '../lib/request'
 import PointSelect from './point-select'
 
-export default function Game(props){
+export default function Game(){
     const [devs, setDevs] = useState([])
     const [show, setShow] = useState(false)
     const [team, setTeam] = useState("")
+    const [id, setId] = useState()
     const router = useRouter()
 
     useEffect(()=>{
-        validateRequest()
+        getSessionDetails()
     },[])
 
-    const validateRequest = async () => {
+    const getSessionDetails = async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const sessionid = urlParams.get('sessionid');
-        if (!sessionid) { //check if session id is present in the query param
-            router.push('/')
-        }
-        const session = await getSession(sessionid)
+        const sessionid = urlParams.get('sessionid')
         const id = sessionStorage.getItem('id')
         if(id !== sessionid) {
             sessionStorage.setItem('id', sessionid)
@@ -32,6 +29,7 @@ export default function Game(props){
                 }
             })
         } else {
+            const session = await getSession(sessionid)
             const names = session.devs.map(dev => {
                 return {
                     name: dev.name,
@@ -40,6 +38,7 @@ export default function Game(props){
             })
             setDevs(names)
             setTeam(session.team)
+            setId(sessionid)
         }
     }
 
@@ -62,7 +61,13 @@ export default function Game(props){
                 </div>
                 <div className={styles.card}>
                     {
-                        devs.map(d => <Point key={d.name} player={d.name} point={d.point} show={show}/>)
+                        devs.map(
+                            d => <Point key={d.name} 
+                                        player={d.name} 
+                                        pts={d.point} 
+                                        show={show}
+                                        id={id}/>
+                        )
                     }
                 </div>
                 <div className={styles.action}>
@@ -76,4 +81,5 @@ export default function Game(props){
         </div>
         
     )
-}
+                
+}            

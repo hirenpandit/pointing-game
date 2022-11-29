@@ -111,6 +111,17 @@
   transform: translate3d(0, 2px, 0);
 }
 
+.checkIcon{
+  width: 2rem;
+  height: 0.5rem;
+  margin-right: -5rem;
+}
+
+.checkIcon svg {
+  height: 1.3em;
+  margin-top: 0.35rem;
+}
+
 .action {
   display: flex;
   gap: 0.5rem;
