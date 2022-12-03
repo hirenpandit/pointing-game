@@ -2,17 +2,18 @@ import styles from '../styles/Home.module.css'
 import Point from './point'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
-import { getSession } from '../lib/request'
 import PointSelect from './point-select'
+import {useSelector, useDispatch} from 'react-redux'
+import { retrieveSession } from '../redux/actions/session'
 
 export default function Game(){
-    const [devs, setDevs] = useState([])
     const [show, setShow] = useState(false)
-    const [team, setTeam] = useState("")
-    const [id, setId] = useState()
     const router = useRouter()
+    const dispatch = useDispatch()
+    const { data } = useSelector(state => state.session)
 
     useEffect(()=>{
+        console.log(`re-rendering game`)
         getSessionDetails()
     },[])
 
@@ -29,16 +30,7 @@ export default function Game(){
                 }
             })
         } else {
-            const session = await getSession(sessionid)
-            const names = session.devs.map(dev => {
-                return {
-                    name: dev.name,
-                    point: dev.point ? dev.point : 0,
-                }
-            })
-            setDevs(names)
-            setTeam(session.team)
-            setId(sessionid)
+            dispatch(retrieveSession(id))
         }
     }
 
@@ -52,21 +44,21 @@ export default function Game(){
         console.log(`clearing`)
     }
 
-    return( devs && 
+    return( !data.loading && 
         <div className={styles.pointsview}>
             <div className={styles.selectionView}>
                 <div className={styles.title}>Get started by pointing stories !</div>
                 <div className={styles.title}>
-                    {team}
+                    {data.team}
                 </div>
                 <div className={styles.card}>
                     {
-                        devs.map(
+                        data.devs.map(
                             d => <Point key={d.name} 
                                         player={d.name} 
                                         pts={d.point} 
                                         show={show}
-                                        id={id}/>
+                                        id={data._id}/>
                         )
                     }
                 </div>
