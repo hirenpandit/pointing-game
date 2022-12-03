@@ -1,7 +1,6 @@
 import clientPromise from "../../lib/mongodb"
 
 export default async function game(req, res){
-    console.table(req.method)
     const client = await clientPromise
     const db = client.db('planning_poker')
 
