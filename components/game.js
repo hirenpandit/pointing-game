@@ -17,6 +17,9 @@ export default function Game(){
         getSessionDetails()
     },[])
 
+    useEffect(()=>{
+    },[data])
+
     const getSessionDetails = async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const sessionid = urlParams.get('sessionid')
@@ -44,7 +47,7 @@ export default function Game(){
         console.log(`clearing`)
     }
 
-    return( !data.loading && 
+    return( !data.loading &&
         <div className={styles.pointsview}>
             <div className={styles.selectionView}>
                 <div className={styles.title}>Get started by pointing stories !</div>
@@ -56,9 +59,8 @@ export default function Game(){
                         data.devs.map(
                             d => <Point key={d.name} 
                                         player={d.name} 
-                                        pts={d.point} 
-                                        show={show}
-                                        id={data._id}/>
+                                        point={d.point} 
+                                        show={show}/>
                         )
                     }
                 </div>

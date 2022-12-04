@@ -1,11 +1,12 @@
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import styles from '../styles/Home.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faCommentDots } from '@fortawesome/free-regular-svg-icons'
 
 
-export default function Point({player, pts, show, id}){
-    const [point, setPoint] = useState(pts)
+export default function Point({player, point, show}){
+    useEffect(()=>{
+    }, [point])
     
     return(
         <>

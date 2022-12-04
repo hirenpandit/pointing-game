@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 import { updatePoints } from '../lib/request'
 import { io } from 'socket.io-client'
 import styles from '../styles/Home.module.css'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { retrieveSession } from '../redux/actions/session'
 
 const points = [1,2,3,5,8,13,21,'☕']
@@ -26,11 +26,7 @@ export default function PointSelect(){
         })
         socket.emit('join', {id: id})
         socket.on('update-point', data=>{
-            console.log(`points updated`)
             dispatch(retrieveSession(id))
-            // if(player === data.name) {
-            //     setPoint(data.point)
-            // }
         })
     }
 

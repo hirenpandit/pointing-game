@@ -6,10 +6,10 @@ const initailState = {
     devs: []}
 
 const session = (state = {
-    data: {...initailState, loading: true}
+    data: {...initailState, loading:true}
 }, action) => {
     switch(action.type) {
-        case types.GET_SESSION:
+        case types.SET_SESSION:
             return {
                 ...state,
                 data: {...action.payload, loading:false},
