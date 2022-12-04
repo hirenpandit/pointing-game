@@ -1,7 +1,6 @@
 import {useEffect} from 'react'
 import styles from '../styles/Home.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle, faCommentDots } from '@fortawesome/free-regular-svg-icons'
+import Image from 'next/image'
 
 
 export default function Point({player, point, show}){
@@ -11,15 +10,28 @@ export default function Point({player, point, show}){
     return(
         <>
             <div className={styles.grid}>
-                <div className={styles.checkIcon}>
+                <div className={styles.icon}>
                     {point > 0 
-                        ? <FontAwesomeIcon icon={faCheckCircle} /> 
-                        : <FontAwesomeIcon icon={faCommentDots} />
+                        ? 
+                        <div className={styles.checkIcon}>
+                            <Image src="/done.png" width="50px" height="50px" alt='done'/>
+                        </div>
+                        : 
+                        <div className={styles.thinkIcon}>
+                            <Image src="/thinking2.png" width="50px" height="50px" alt='think'/>
+                        </div>
                     }
                 </div>
                 <div className={styles.name}>{player}</div>
-                {show && 
-                    <button className={styles.pointbtn}>{point}</button>
+                {show &&
+                    <button className={styles.pointbtn}>
+                        {console.log(point)}
+                        {!point ? <div className={styles.teaImage}>
+                                    <Image  src="/tea.png" width="50px" height="50px" alt='think'/>
+                                </div> 
+                                : point
+                        }
+                    </button>
                 }
                 {!show && 
                     <button className={styles.pointbtn}></button>

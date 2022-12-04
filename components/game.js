@@ -48,31 +48,34 @@ export default function Game(){
     }
 
     return( !data.loading &&
-        <div className={styles.pointsview}>
-            <div className={styles.selectionView}>
-                <div className={styles.title}>Get started by pointing stories !</div>
-                <div className={styles.title}>
-                    {data.team}
+        <div className={styles.container}>
+            <div className={styles.pointsview}>
+                <div className={styles.selectionView}>
+                    <div className={styles.title}>Get started by pointing stories !</div>
+                    <div className={styles.title}>
+                        {data.team}
+                    </div>
+                    <div className={styles.card}>
+                        {
+                            data.devs.map(
+                                d => <Point key={d.name} 
+                                            player={d.name} 
+                                            point={d.point} 
+                                            show={show}/>
+                            )
+                        }
+                    </div>
+                    <div className={styles.action}>
+                        <button onClick={showhide}>Show</button>
+                        <button onClick={clear}>Reset</button>
+                    </div>
                 </div>
-                <div className={styles.card}>
-                    {
-                        data.devs.map(
-                            d => <Point key={d.name} 
-                                        player={d.name} 
-                                        point={d.point} 
-                                        show={show}/>
-                        )
-                    }
-                </div>
-                <div className={styles.action}>
-                    <button onClick={showhide}>Show</button>
-                    <button onClick={clear}>Reset</button>
-                </div>
+                <div className={styles.pointSelectionView}>
+                    <PointSelect />
+                </div> 
             </div>
-            <div className={styles.pointSelectionView}>
-                <PointSelect />
-            </div> 
         </div>
+        
         
     )
                 
