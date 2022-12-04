@@ -57,8 +57,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
-        <div>
+       <div>
             <div className={styles.newsession}>
               <input type="text" 
                     label="Team"
@@ -81,7 +80,6 @@ export default function Home() {
               }
             </div>
         </div>
-      </main>
     </div>
   )
 }
