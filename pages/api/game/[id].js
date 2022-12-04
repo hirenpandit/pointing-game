@@ -28,7 +28,6 @@ export default async function handler(req, res) {
         const result = await db.collection('games')
                                 .find({_id: new ObjectId(id)})
                                 .toArray()
-        console.debug(result)
         res.status(200).json(result)
     }
     
