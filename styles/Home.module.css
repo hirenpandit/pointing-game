@@ -84,7 +84,6 @@
   color: #41403e;
   cursor: pointer;
   display: inline-block;
-  font-family: Neucha, sans-serif;
   font-size: 1rem;
   /* line-height: 23px; */
   outline: none;
@@ -97,6 +96,7 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .grid button:hover{

@@ -57,6 +57,9 @@ export default function PointSelect(){
 }
 
 function savePoint(e) {
+    if(!e.target.value){
+        return //TODO: implement need tea feature
+    }
     const point = e.target.value
     const id = sessionStorage.getItem('id')
     const name = sessionStorage.getItem('name')

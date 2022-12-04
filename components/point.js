@@ -25,12 +25,7 @@ export default function Point({player, point, show}){
                 <div className={styles.name}>{player}</div>
                 {show &&
                     <button className={styles.pointbtn}>
-                        {console.log(point)}
-                        {!point ? <div className={styles.teaImage}>
-                                    <Image  src="/tea.png" width="50px" height="50px" alt='think'/>
-                                </div> 
-                                : point
-                        }
+                        {point}
                     </button>
                 }
                 {!show && 
