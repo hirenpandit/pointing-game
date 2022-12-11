@@ -12,5 +12,10 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-_Feature_
+# Features
+-Create session to start story point. Provide name of the team and your name to begin-
+_Ask other to join the session by sharing the link which contains the created session id i.e [/table?sessionid={sessionid}]_
+_Real time update of point given by other user in same session_
+_Clear session_
+_Show votes, Show statistics of the voetes_
 
