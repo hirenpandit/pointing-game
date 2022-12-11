@@ -17,6 +17,7 @@ export default async function handler(req, res) {
                 console.log(`joinded: ${data.id}`)
             })
             socket.on('point-update', data => {
+                console.log(`updating points ${data}`)
                 socket.to(data.id).emit('update-point', data)
             })
             
