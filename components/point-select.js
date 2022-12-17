@@ -51,7 +51,7 @@ export default function PointSelect(){
         <>  
             <div className={styles.selection}>
                 <div className={styles.selectHeading}>Select Point</div>
-                <div className={styles.point}> {''+isConnected}
+                <div className={styles.point}>
                 {
                     points.map(elem => {
                         return (
