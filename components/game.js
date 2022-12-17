@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import PointSelect from './point-select'
 import {useSelector, useDispatch} from 'react-redux'
 import { retrieveSession } from '../redux/actions/session'
+import { clearPoints } from '../lib/request'
 
 export default function Game(){
     const [show, setShow] = useState(false)
@@ -43,8 +44,8 @@ export default function Game(){
         })
     }
 
-    const clear = () => {
-        console.log(`clearing`)
+    const clear = (id) => {
+        clearPoints(id)
     }
 
     return( !data.loading &&
@@ -67,7 +68,7 @@ export default function Game(){
                     </div>
                     <div className={styles.action}>
                         <button onClick={showhide}>Show</button>
-                        <button onClick={clear}>Reset</button>
+                        <button onClick={(e) => clear(data._id)}>Reset</button>
                     </div>
                 </div>
                 <div className={styles.pointSelectionView}>

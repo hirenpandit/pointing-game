@@ -33,7 +33,6 @@ export default function PointSelect(){
         })
 
         socket.on('connect', () => {
-            setIsConnected(true)
             socket.emit('join', {id: id})
         })
         

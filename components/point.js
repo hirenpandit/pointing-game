@@ -18,7 +18,7 @@ export default function Point({player, point, show}){
                         </div>
                         : 
                         <div className={styles.thinkIcon}>
-                            <Image src="/thinking2.png" width="50px" height="50px" alt='think'/>
+                            {/* <Image src="/thinking2.png" width="50px" height="50px" alt='think'/> */}
                         </div>
                     }
                 </div>
