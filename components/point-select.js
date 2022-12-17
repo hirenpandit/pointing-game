@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import { updatePoints } from '../lib/request'
 import { io } from 'socket.io-client'
 import styles from '../styles/Home.module.css'
@@ -7,25 +7,41 @@ import { retrieveSession } from '../redux/actions/session'
 import Image from 'next/image'
 
 const points = [1,2,3,5,8,13,21,-1]
-let socket
 
 export default function PointSelect(){
+    const socket = io();
+    const [isConnected, setIsConnected] = useState(socket.isConnected)
 
     const dispatch = useDispatch()
 
     useEffect(()=>{
         socketInitializer()
+
+        return () => {
+            socket.off('connect');
+            socket.off('disconnect');
+            socket.off('pong');
+        }
     },[])
 
     const socketInitializer = async () => {
         const id = sessionStorage.getItem('id')
         await fetch(`/api/socket/${id}`)
-        socket = io()
+
+        socket.on('connect-error', (err) => {
+            console.log(err)
+        })
 
         socket.on('connect', () => {
-            console.log(`connected`)
+            setIsConnected(true)
+            socket.emit('join', {id: id})
         })
-        socket.emit('join', {id: id})
+        
+        socket.on('hello', data =>{
+            console.log(data)
+        })
+        
+        
         socket.on('update-point', data=>{
             dispatch(retrieveSession(id))
         })
@@ -35,11 +51,11 @@ export default function PointSelect(){
         <>  
             <div className={styles.selection}>
                 <div className={styles.selectHeading}>Select Point</div>
-                <div className={styles.point}>
+                <div className={styles.point}> {''+isConnected}
                 {
                     points.map(elem => {
                         return (
-                            <button key={elem} onClick={savePoint} value={elem}>
+                            <button key={elem} onClick={e => savePoint(e, socket)} value={elem}>
                                 { elem === -1 ?
                                         <Image src="/tea.png" width="50px" height="50px" alt='think'/>
                                     :
@@ -56,7 +72,7 @@ export default function PointSelect(){
 
 }
 
-function savePoint(e) {
+function savePoint(e, socket) {
     if(!e.target.value){
         return //TODO: implement need tea feature
     }
