@@ -1,51 +1,18 @@
 import {useEffect, useState} from 'react'
 import { updatePoints } from '../lib/request'
-import { io } from 'socket.io-client'
 import styles from '../styles/Home.module.css'
-import {useDispatch, useSelector} from 'react-redux'
-import { retrieveSession } from '../redux/actions/session'
+import {useDispatch} from 'react-redux'
 import Image from 'next/image'
+import socket from '../utils/socket-utils'
+import { retrieveSession } from '../redux/actions/session'
 
 const points = [1,2,3,5,8,13,21,-1]
 
 export default function PointSelect(){
-    const socket = io();
-    const [isConnected, setIsConnected] = useState(socket.isConnected)
-
     const dispatch = useDispatch()
 
     useEffect(()=>{
-        socketInitializer()
-
-        return () => {
-            socket.off('connect');
-            socket.off('disconnect');
-            socket.off('pong');
-        }
     },[])
-
-    const socketInitializer = async () => {
-        const id = sessionStorage.getItem('id')
-        await fetch(`/api/socket/${id}`)
-
-        socket.on('connect-error', (err) => {
-            console.log(err)
-        })
-
-        socket.on('connect', () => {
-            setIsConnected(true)
-            socket.emit('join', {id: id})
-        })
-        
-        socket.on('hello', data =>{
-            console.log(data)
-        })
-        
-        
-        socket.on('update-point', data=>{
-            dispatch(retrieveSession(id))
-        })
-    }
 
     return (
         <>  
@@ -55,7 +22,7 @@ export default function PointSelect(){
                 {
                     points.map(elem => {
                         return (
-                            <button key={elem} onClick={e => savePoint(e, socket)} value={elem}>
+                            <button key={elem} onClick={e => savePoint(e, dispatch)} value={elem}>
                                 { elem === -1 ?
                                         <Image src="/tea.png" width="50px" height="50px" alt='think'/>
                                     :
@@ -72,7 +39,7 @@ export default function PointSelect(){
 
 }
 
-function savePoint(e, socket) {
+function savePoint(e, dispatch) {
     if(!e.target.value){
         return //TODO: implement need tea feature
     }
@@ -81,5 +48,6 @@ function savePoint(e, socket) {
     const name = sessionStorage.getItem('name')
     updatePoints(id, name, point).then(res => {
         socket.emit('point-update', {id: id, name: name, point: point})
+        dispatch(retrieveSession(id))
     })
 }

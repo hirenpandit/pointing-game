@@ -19,6 +19,11 @@ export default async function handler(req, res) {
             socket.on('point-update', data => {
                 socket.to(data.id).emit('update-point', data)
             })
+
+            socket.on('point-clear', data => {
+                console.log(`point-clear fired ${data.id}`)
+                socket.to(data.id).emit('clear-point', data)
+            })
             
         })
         
