@@ -1,5 +1,5 @@
 import { io } from "socket.io-client"
-const socket = io()
+const socket = io('https://pointing-game.vercel.app/')
 
 socket.on('connect-error', (err) => {
     console.log(err)
