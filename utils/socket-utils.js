@@ -1,15 +1,16 @@
-import { io } from "socket.io-client";
+import { io } from "socket.io-client"
+const socket = io()
 
-let socket
-export function init(){
-    socket = io();
+socket.on('connect-error', (err) => {
+    console.log(err)
+})
 
-}
+socket.on('connect', () => {
+    console.log(`socket connected`)
+})
 
-export function getSocket(){
-    if(!socket){
-        socket = io()
-    }
-    return socket
-    
-}
+socket.on('hello', data =>{
+    console.log(data)
+})
+
+export default socket

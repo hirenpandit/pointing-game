@@ -6,16 +6,23 @@ import PointSelect from './point-select'
 import {useSelector, useDispatch} from 'react-redux'
 import { retrieveSession } from '../redux/actions/session'
 import { clearPoints } from '../lib/request'
+import socket from '../utils/socket-utils'
 
 export default function Game(){
     const [show, setShow] = useState(false)
     const router = useRouter()
     const dispatch = useDispatch()
     const { data } = useSelector(state => state.session)
+    const [isConnected, setIsConnected] = useState(socket.isConnected)
 
     useEffect(()=>{
-        console.log(`re-rendering game`)
         getSessionDetails()
+        socketInitializer()
+        return () => {
+            socket.off('connect');
+            socket.off('disconnect');
+            socket.off('pong');
+        }
     },[])
 
     useEffect(()=>{
@@ -38,14 +45,33 @@ export default function Game(){
         }
     }
 
+    const socketInitializer = async () => {
+        const id = sessionStorage.getItem('id')
+        await fetch(`/api/socket/${id}`)
+
+        socket.emit('join', {id: id})
+        
+        socket.on('update-point', data=>{
+            dispatch(retrieveSession(data.id))
+        })
+
+        socket.on('clear-point', data=>{
+            console.log(`clear-point received`)
+            console.log(data)
+            dispatch(retrieveSession(data.id))
+        })
+    }
+
     const showhide = () => {
         setShow((prev) => {
             return !prev
         })
     }
 
-    const clear = (id) => {
-        clearPoints(id)
+    const clear = async (id) => {
+        await clearPoints(id)
+        socket.emit('point-clear', {id: id})
+        dispatch(retrieveSession(id))
     }
 
     return( !data.loading &&
