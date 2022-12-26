@@ -1,5 +1,5 @@
 import { io } from "socket.io-client"
-const socket = io('ws://pointing-game.vercel.app/', {
+const socket = io('wss://pointing-game.vercel.app/', {
     transports: ['websocket'],
     reconnection: true
 })
