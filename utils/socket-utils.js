@@ -1,5 +1,5 @@
 import { io } from "socket.io-client"
-const socket = io('http://44.202.164.56', {
+const socket = io('', {
     transports: ['websocket'],
     reconnection: true
 })
