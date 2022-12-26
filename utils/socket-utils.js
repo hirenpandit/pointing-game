@@ -1,5 +1,8 @@
 import { io } from "socket.io-client"
-const socket = io('https://pointing-game.vercel.app/socket.io/')
+const socket = io('ws://pointing-game.vercel.app/', {
+    transports: ['websocket'],
+    reconnection: true
+})
 
 socket.on('connect-error', (err) => {
     console.log(err)
