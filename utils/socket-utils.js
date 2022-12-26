@@ -1,5 +1,5 @@
 import { io } from "socket.io-client"
-const socket = io('https://pointing-game.vercel.app/', {
+const socket = io('http://44.202.164.56', {
     transports: ['websocket'],
     reconnection: true
 })
