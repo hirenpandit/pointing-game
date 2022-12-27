@@ -1,7 +1,6 @@
 export default function Loading(){
     return(
-        <>
-            <pre>Loading...</pre>
-        </>
+        <div class="spinner-border" role="status">
+      </div>
     )
 }
