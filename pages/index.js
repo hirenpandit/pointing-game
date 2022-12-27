@@ -5,12 +5,15 @@ import styles from '../styles/Home.module.css'
 import {useState, useEffect, useRef} from 'react'
 import { useRouter } from 'next/router'
 import { getSession, postRequest, putRequest } from '../lib/request'
+import Loading from './loading'
 
 export default function Home() {
 
   const [team, setTeam] = useState('')
   const [pName, setName] = useState('')
   const [create, isCreate] = useState(true)
+
+  const [loading, setLoading] = useState(false)
 
   const router = useRouter()
   const btnRef = useRef()
@@ -38,6 +41,7 @@ export default function Home() {
   }, [team, pName])
 
   const newSession = () => {
+    setLoading(true)
     sessionStorage.setItem('team', team)
     sessionStorage.setItem('name', pName)
     postRequest(team, pName).then(res => {
@@ -47,6 +51,7 @@ export default function Home() {
     
   }
   const joinSession = () => {
+    setLoading(true)
     const id = sessionStorage.getItem('id')
     putRequest(id, team, pName).then(res => {
       sessionStorage.setItem('name', pName)
@@ -57,29 +62,34 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-       <div>
-            <div className={styles.newsession}>
-              <input type="text" 
-                    label="Team"
-                    placeholder='Team' 
-                    id="session-name-txt" 
-                    onChange={(e) => setTeam(e.target.value)}
-                    value={team}
-                    disabled={!create}/>
-              <input type="text" 
-                    label="Name"
-                    placeholder='Your Name' 
-                    id="session-name-txt" 
-                    onChange={(e) => setName(e.target.value)}
-                    value={pName}/>
-              {create && 
-                <button onClick={newSession} ref={btnRef}>Create</button>
-              }
-              {!create &&
-                <button onClick={joinSession} ref={btnRef}>Join</button>
-              }
-            </div>
+      {
+        !loading ? 
+        <div>
+          <div className={styles.newsession}>
+            <input type="text" 
+                  label="Team"
+                  placeholder='Team' 
+                  id="session-name-txt" 
+                  onChange={(e) => setTeam(e.target.value)}
+                  value={team}
+                  disabled={!create}/>
+            <input type="text" 
+                  label="Name"
+                  placeholder='Your Name' 
+                  id="session-name-txt" 
+                  onChange={(e) => setName(e.target.value)}
+                  value={pName}/>
+            {create && 
+              <button className={styles.createbtn} onClick={newSession} ref={btnRef}>Create</button>
+            }
+            {!create &&
+              <button className={styles.createbtn} onClick={joinSession} ref={btnRef}>Join</button>
+            }
+          </div>
         </div>
+        :
+        <Loading/>
+      }
     </div>
   )
 }

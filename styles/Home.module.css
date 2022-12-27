@@ -1,5 +1,6 @@
 .app{
   font-family: 'Quicksand', sans-serif;
+  color:rgb(69, 69, 69);
 }
 .container {
   padding: 0 2rem;
@@ -25,13 +26,34 @@
   line-height: 2rem;
   width: 20rem;
   border-radius: 5px;
-  border: 1px solid grey;
+  border: 1px solid #d0c8c8;
+  padding: 0px 0px 0px 10px;
+  font-family: 'Quicksand', sans-serif;
 }
 
-.newsession button {
+.createbtn {
+  background-color: #dda19c;
+  border: 1px solid #dda19c;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  text-align: center;
   line-height: 2rem;
-  border-radius: 5px;
-  border: 1px solid grey;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.createbtn:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+.createbtn:disabled {
+  cursor:not-allowed;
 }
 
 .pointsview {
