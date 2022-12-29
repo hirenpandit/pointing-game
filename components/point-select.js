@@ -1,12 +1,10 @@
 import {useEffect, useState} from 'react'
 import { updatePoints } from '../lib/request'
-import styles from '../styles/Home.module.css'
 import {useDispatch} from 'react-redux'
-import Image from 'next/image'
 import socket from '../utils/socket-utils'
 import { retrieveSession } from '../redux/actions/session'
 
-const points = [1,2,3,5,8,13,21,-1]
+const points = [1,2,3,5,8,13,21]
 
 export default function PointSelect(){
     const dispatch = useDispatch()
@@ -16,18 +14,17 @@ export default function PointSelect(){
 
     return (
         <>  
-            <div className={styles.selection}>
-                <div className={styles.selectHeading}>Select Point</div>
-                <div className={styles.point}>
+            <div className='grid gap-2'>
+                <div className='p-2 g-col-6'>Select Point</div>
+                <div className='col'>
                 {
                     points.map(elem => {
                         return (
-                            <button key={elem} onClick={e => savePoint(e, dispatch)} value={elem}>
-                                { elem === -1 ?
-                                        <Image src="/tea.png" width="50px" height="50px" alt='think'/>
-                                    :
-                                        elem
-                                }
+                            <button key={elem} 
+                                    className='m-1 col-1 btn btn-outline-dark'
+                                    onClick={e => savePoint(e, dispatch)} 
+                                    value={elem}>
+                                        {elem}
                             </button>
                         )
                     })

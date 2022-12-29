@@ -1,7 +1,7 @@
 export default function Loading(){
     return(
-        <>
-            <pre>Loading...</pre>
-        </>
+        <div className="position-absolute top-50 start-50">
+          <div class="spinner-border" role="status"></div>
+        </div>
     )
 }

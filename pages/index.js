@@ -1,7 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-
 import {useState, useEffect, useRef} from 'react'
 import { useRouter } from 'next/router'
 import { getSession, postRequest, putRequest } from '../lib/request'
@@ -61,29 +57,39 @@ export default function Home() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className='container p-3 w-25'>
       {
         !loading ? 
-        <div>
-          <div className={styles.newsession}>
-            <input type="text" 
-                  label="Team"
-                  placeholder='Team' 
-                  id="session-name-txt" 
-                  onChange={(e) => setTeam(e.target.value)}
-                  value={team}
-                  disabled={!create}/>
-            <input type="text" 
-                  label="Name"
-                  placeholder='Your Name' 
-                  id="session-name-txt" 
-                  onChange={(e) => setName(e.target.value)}
-                  value={pName}/>
+        <div className='col p-2'>
+          <div className='row pt-2'>
+            <input type="text"
+                   className='form-control'
+                   label="Team"
+                   placeholder='Team'
+                   id="session-name-txt" 
+                   onChange={(e) => setTeam(e.target.value)}
+                   value={team}
+                   disabled={!create}/>
+          </div>
+          <div className='row pb-2 pt-2'>
+            <input type="text"
+                   className='form-control'
+                   label="Name"
+                   placeholder='Your Name' 
+                   id="session-name-txt" 
+                   onChange={(e) => setName(e.target.value)}
+                   value={pName}/>
+          </div>
+          <div className='row'>
             {create && 
-              <button className={styles.createbtn} onClick={newSession} ref={btnRef}>Create</button>
+              <button type="button" 
+                      class="btn btn-outline-success" 
+                      onClick={newSession} ref={btnRef}>Create</button>
             }
             {!create &&
-              <button className={styles.createbtn} onClick={joinSession} ref={btnRef}>Join</button>
+              <button type="button" 
+                      class="btn btn-outline-success" 
+                      onClick={joinSession} ref={btnRef}>Join</button>
             }
           </div>
         </div>
