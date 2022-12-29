@@ -1,11 +1,10 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import Footer from './footer'
 
 export default function Layout({children}) {
     return (
         <>
-            <div className={styles.app}>
+            <div className='container p-4'>
                 <header>
                     <Head>
                         <title>Pointing Game!</title>
@@ -13,8 +12,8 @@ export default function Layout({children}) {
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
                 </header>
-                <main className={styles.main}>{children}</main>
-                <footer className={styles.footer}>
+                <main>{children}</main>
+                <footer className='fixed-bottom'>
                     <Footer/>
                 </footer>
             </div>

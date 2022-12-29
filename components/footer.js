@@ -1,7 +1,7 @@
 export default function Footer(){
     return(
         <>
-        <div className='grid'>
+        <div className='grid-md d-flex p-3 m-4 justify-content-center border-top border-dark-subtle'>
             <div className='row'>
                 <div className='col'>
                     <a target='_blank' rel='noopener noreferrer' href='https://twitter.com/PanditHiren'>
