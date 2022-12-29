@@ -1,8 +1,6 @@
-import styles from '../styles/Home.module.css'
 import Point from './point'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
-import PointSelect from './point-select'
 import {useSelector, useDispatch} from 'react-redux'
 import { retrieveSession } from '../redux/actions/session'
 import { clearPoints } from '../lib/request'
@@ -13,7 +11,6 @@ export default function Game(){
     const router = useRouter()
     const dispatch = useDispatch()
     const { data } = useSelector(state => state.session)
-    const [isConnected, setIsConnected] = useState(socket.isConnected)
 
     useEffect(()=>{
         getSessionDetails()
@@ -75,35 +72,32 @@ export default function Game(){
     }
 
     return( !data.loading &&
-        <div className={styles.container}>
-            <div className={styles.pointsview}>
-                <div className={styles.selectionView}>
-                    <div className={styles.title}>Get started by pointing stories !</div>
-                    <div className={styles.title}>
-                        {data.team}
-                    </div>
-                    <div className={styles.card}>
-                        {
-                            data.devs.map(
-                                d => <Point key={d.name} 
-                                            player={d.name} 
-                                            point={d.point} 
-                                            show={show}/>
-                            )
+        <div className="card border-secondary mb-3">
+            <div className='card-header'>
+                {data.team}
+            </div>
+            <div className='card-body text-secondary'>
+            <ul class="list-group list-group-flush">
+                {
+                    data.devs.map(
+                        d => {
+                            return <li class="list-group-item" key={d.name}>
+                                        <Point key={d.name} 
+                                        player={d.name} 
+                                        point={d.point} 
+                                        show={show}/>
+                                   </li>
                         }
-                    </div>
-                    <div className={styles.action}>
-                        <button onClick={showhide}>Show</button>
-                        <button onClick={(e) => clear(data._id)}>Reset</button>
-                    </div>
+                    )
+                }
+            </ul>
+                
+                <div className='d-flex p-2 gap-1'>
+                    <button className='btn btn-outline-success' onClick={showhide}>Show</button>
+                    <button className='btn btn-outline-danger' onClick={(e) => clear(data._id)}>Reset</button>
                 </div>
-                <div className={styles.pointSelectionView}>
-                    <PointSelect />
-                </div> 
             </div>
         </div>
-        
-        
     )
                 
 }            

@@ -1,5 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 import {useState, useEffect, useRef} from 'react'
@@ -80,10 +78,14 @@ export default function Home() {
                   onChange={(e) => setName(e.target.value)}
                   value={pName}/>
             {create && 
-              <button className={styles.createbtn} onClick={newSession} ref={btnRef}>Create</button>
+              <button type="button" 
+                      class="btn btn-outline-success" 
+                      onClick={newSession} ref={btnRef}>Create</button>
             }
             {!create &&
-              <button className={styles.createbtn} onClick={joinSession} ref={btnRef}>Join</button>
+              <button type="button" 
+                      class="btn btn-outline-success" 
+                      onClick={joinSession} ref={btnRef}>Join</button>
             }
           </div>
         </div>
