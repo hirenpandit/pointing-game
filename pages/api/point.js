@@ -22,22 +22,6 @@ export default async function handler(req, res){
                         message: 'error updating points'
                     })
                 })
-    } else if(req.method === 'DELETE') {
-        const body = req.body
-        await db.collection('games')
-            .updateMany({
-                _id: new ObjectId(body._id)
-            },
-            {$set: {"devs.$[].point": 0}}
-            ).then(result => res.status(200).json({
-                message: 'successfully cleared points'
-            }))
-            .catch(err => {
-                console.log(err)
-                res.status(500).json({
-                    message: 'error clearing points'
-                })
-            })
     }
     
 

@@ -1,13 +1,12 @@
 import Point from './point'
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import { useRouter } from 'next/router'
 import {useSelector, useDispatch} from 'react-redux'
 import { retrieveSession } from '../../redux/actions/session'
-import { clearPoints } from '../../lib/request'
+import { clearPoints, showPoints } from '../../lib/request'
 import socket from '../../utils/socket-utils'
 
 export default function PointList(){
-    const [show, setShow] = useState(false)
     const router = useRouter()
     const dispatch = useDispatch()
     const { data } = useSelector(state => state.session)
@@ -54,20 +53,24 @@ export default function PointList(){
         })
 
         socket.on('clear-point', data=>{
-            console.log(`clear-point received`)
-            console.log(data)
+            dispatch(retrieveSession(data.id))
+        })
+
+        socket.on('points-show', data => {
             dispatch(retrieveSession(data.id))
         })
     }
 
-    const showhide = () => {
-        setShow((prev) => {
-            return !prev
-        })
+    const show = async (id) => {
+       const res = await showPoints(id)
+       console.log(res)
+       socket.emit('show-points', {id: id})
+       dispatch(retrieveSession(id))
     }
 
     const clear = async (id) => {
-        await clearPoints(id)
+        const res = await clearPoints(id)
+        console.log(res)
         socket.emit('point-clear', {id: id})
         dispatch(retrieveSession(id))
     }
@@ -86,7 +89,7 @@ export default function PointList(){
                                         <Point key={d.name} 
                                         player={d.name} 
                                         point={d.point} 
-                                        show={show}/>
+                                        show={data.show}/>
                                    </li>
                         }
                     )
@@ -94,7 +97,7 @@ export default function PointList(){
             </ul>
                 
                 <div className='d-flex p-2 gap-1'>
-                    <button className='btn btn-outline-success' onClick={showhide}>Show</button>
+                    <button className='btn btn-outline-success' onClick={() => show(data._id)}>Show</button>
                     <button className='btn btn-outline-danger' onClick={(e) => clear(data._id)}>Reset</button>
                 </div>
             </div>
