@@ -2,11 +2,11 @@ import Point from './point'
 import {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
 import {useSelector, useDispatch} from 'react-redux'
-import { retrieveSession } from '../redux/actions/session'
-import { clearPoints } from '../lib/request'
-import socket from '../utils/socket-utils'
+import { retrieveSession } from '../../redux/actions/session'
+import { clearPoints } from '../../lib/request'
+import socket from '../../utils/socket-utils'
 
-export default function Game(){
+export default function PointList(){
     const [show, setShow] = useState(false)
     const router = useRouter()
     const dispatch = useDispatch()
@@ -38,6 +38,7 @@ export default function Game(){
                 }
             })
         } else {
+            console.log(`dispatchng event to get the session: ${id}`)
             dispatch(retrieveSession(id))
         }
     }

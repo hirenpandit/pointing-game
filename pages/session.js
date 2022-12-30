@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Game from "../components/game";
-import PointSelect from "../components/point-select";
+import { useEffect } from "react";
+import PointList from "../components/points/point-list";
+import PointSelect from "../components/points/point-select";
 
-export default function Table(){
+export default function Session(){
 
     const router = useRouter()
 
@@ -18,7 +18,7 @@ export default function Table(){
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Game />
+                    <PointList />
                 </div>
                 <div className='col'>
                     <PointSelect />

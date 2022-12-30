@@ -42,7 +42,7 @@ export default function Home() {
     sessionStorage.setItem('name', pName)
     postRequest(team, pName).then(res => {
       sessionStorage.setItem('id',res._id)
-      router.push(`/table?sessionid=${res._id}`)
+      router.push(`/session?sessionid=${res._id}`)
     })
     
   }
@@ -51,7 +51,7 @@ export default function Home() {
     const id = sessionStorage.getItem('id')
     putRequest(id, team, pName).then(res => {
       sessionStorage.setItem('name', pName)
-      router.push(`/table?sessionid=${id}`)
+      router.push(`/session?sessionid=${id}`)
     }).catch(e => console.error(e))
     
   }
@@ -83,12 +83,12 @@ export default function Home() {
           <div className='row'>
             {create && 
               <button type="button" 
-                      class="btn btn-outline-success" 
+                      className="btn btn-outline-success" 
                       onClick={newSession} ref={btnRef}>Create</button>
             }
             {!create &&
               <button type="button" 
-                      class="btn btn-outline-success" 
+                      className="btn btn-outline-success" 
                       onClick={joinSession} ref={btnRef}>Join</button>
             }
           </div>
