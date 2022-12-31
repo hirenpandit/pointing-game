@@ -15,9 +15,11 @@ export default function Layout({children}) {
                 </header>
                 <main>
                     <ToastMsg />
-                    {children}
+                    <div>
+                        {children}
+                    </div>
                 </main>
-                <footer className='fixed-bottom'>
+                <footer className='bottom'>
                     <Footer/>
                 </footer>
             </div>
