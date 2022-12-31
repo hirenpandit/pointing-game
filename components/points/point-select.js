@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react'
-import { updatePoints } from '../lib/request'
+import {useEffect} from 'react'
 import {useDispatch} from 'react-redux'
-import socket from '../utils/socket-utils'
-import { retrieveSession } from '../redux/actions/session'
+import { retrieveSession } from '../../redux/actions/session'
+import { updatePoints } from '../../lib/request'
+import socket from '../../utils/socket-utils'
 
 const points = [1,2,3,5,8,13,21]
 

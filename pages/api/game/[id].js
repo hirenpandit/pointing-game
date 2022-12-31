@@ -30,5 +30,7 @@ export default async function handler(req, res) {
                                 .toArray()
         res.status(200).json(result)
     }
+
+    res.end()
     
 }

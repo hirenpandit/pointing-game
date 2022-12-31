@@ -1,13 +1,13 @@
 import Point from './point'
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import { useRouter } from 'next/router'
 import {useSelector, useDispatch} from 'react-redux'
-import { retrieveSession } from '../redux/actions/session'
-import { clearPoints } from '../lib/request'
-import socket from '../utils/socket-utils'
+import { retrieveSession } from '../../redux/actions/session'
+import { clearPoints, showPoints } from '../../lib/request'
+import socket from '../../utils/socket-utils'
+import { messages } from '../../redux/actions/message'
 
-export default function Game(){
-    const [show, setShow] = useState(false)
+export default function PointList(){
     const router = useRouter()
     const dispatch = useDispatch()
     const { data } = useSelector(state => state.session)
@@ -38,6 +38,7 @@ export default function Game(){
                 }
             })
         } else {
+            console.log(`dispatchng event to get the session: ${id}`)
             dispatch(retrieveSession(id))
         }
     }
@@ -53,21 +54,28 @@ export default function Game(){
         })
 
         socket.on('clear-point', data=>{
-            console.log(`clear-point received`)
+            dispatch(retrieveSession(data.id))
+            dispatch(messages(`Clear votes performed by ${data.by}`))
+        })
+
+        socket.on('points-show', data => {
             console.log(data)
             dispatch(retrieveSession(data.id))
+            dispatch(messages(`Show votes performed by ${data.by}`))
         })
     }
 
-    const showhide = () => {
-        setShow((prev) => {
-            return !prev
-        })
+    const show = async (id) => {
+        const by = sessionStorage.getItem('name')
+        await showPoints(id, by)
+        socket.emit('show-points', {id: id, by: by})
+        dispatch(retrieveSession(id))
     }
 
     const clear = async (id) => {
-        await clearPoints(id)
-        socket.emit('point-clear', {id: id})
+        const by = sessionStorage.getItem('name')
+        await clearPoints(id, by)
+        socket.emit('point-clear', {id: id, by: by})
         dispatch(retrieveSession(id))
     }
 
@@ -85,7 +93,7 @@ export default function Game(){
                                         <Point key={d.name} 
                                         player={d.name} 
                                         point={d.point} 
-                                        show={show}/>
+                                        show={data.show}/>
                                    </li>
                         }
                     )
@@ -93,7 +101,7 @@ export default function Game(){
             </ul>
                 
                 <div className='d-flex p-2 gap-1'>
-                    <button className='btn btn-outline-success' onClick={showhide}>Show</button>
+                    <button className='btn btn-outline-success' onClick={() => show(data._id)}>Show</button>
                     <button className='btn btn-outline-danger' onClick={(e) => clear(data._id)}>Reset</button>
                 </div>
             </div>

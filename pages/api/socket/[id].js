@@ -1,13 +1,13 @@
 import { Server } from "socket.io"
 
+let io
+
 export default async function handler(req, res) {
 
     if(req.socket.server.io) {
         console.log(`Socket is already running`)
-        
     } else {
-        console.log(`Socket is initializing`)
-        const io = new Server(res.socket.server)
+        io = new Server(res.socket.server)
         res.socket.server.io = io
 
         io.on('connection', socket => {
@@ -21,8 +21,11 @@ export default async function handler(req, res) {
             })
 
             socket.on('point-clear', data => {
-                console.log(`point-clear fired ${data.id}`)
                 socket.to(data.id).emit('clear-point', data)
+            })
+
+            socket.on('show-points', data => {
+                socket.to(data.id).emit('points-show', data)
             })
             
         })
