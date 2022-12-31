@@ -62,14 +62,16 @@ export default function PointList(){
     }
 
     const show = async (id) => {
-       const res = await showPoints(id)
-       console.log(res)
-       socket.emit('show-points', {id: id})
-       dispatch(retrieveSession(id))
+        const by = sessionStorage.getItem('name')
+        const res = await showPoints(id, by)
+        console.log(res)
+        socket.emit('show-points', {id: id})
+        dispatch(retrieveSession(id))
     }
 
     const clear = async (id) => {
-        const res = await clearPoints(id)
+        const by = sessionStorage.getItem('name')
+        const res = await clearPoints(id, by)
         console.log(res)
         socket.emit('point-clear', {id: id})
         dispatch(retrieveSession(id))

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Footer from './footer'
+import ToastMsg from './toast'
 
 export default function Layout({children}) {
     return (
@@ -12,7 +13,10 @@ export default function Layout({children}) {
                         <link rel="icon" href="/favicon.ico" />
                     </Head>
                 </header>
-                <main>{children}</main>
+                <main>
+                    <ToastMsg />
+                    {children}
+                </main>
                 <footer className='fixed-bottom'>
                     <Footer/>
                 </footer>

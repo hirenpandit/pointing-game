@@ -5,8 +5,8 @@ export default async function handle(req, res) {
     const client = await clientPromise
     const db = client.db('planning_poker')
 
-    const {id, action} = req.query
-    console.log(`performing action ${action} on id ${id}`)
+    const {id, action, by} = req.query
+    console.log(`performing action ${action} on id ${id} by {by}`)
 
     if(action==='show'){
         await db.collection('games')
@@ -38,7 +38,8 @@ export default async function handle(req, res) {
     }
 
     res.status(200).json({
-        "message": `successfully performed action: ${action}`
+        "message": `successfully performed action: ${action}`,
+        "by": by,
     })
     res.end()
 }
