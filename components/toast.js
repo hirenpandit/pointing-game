@@ -2,33 +2,26 @@
 import { useEffect, useState } from 'react';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { remove } from '../redux/actions/message';
 
 
 const ToastMsg = () => {
     const messages = useSelector(state=>state.messages.messages)
-    const [show, setShow] = useState([]);
+    const dispatch = useDispatch()
     useEffect(() => {
-        const arr = Array.from(messages, msg => true)
-        setShow(arr)
+
     }, [messages])
 
-    const setShowStatus = (index) => {
-        setShow((prevState) => {
-            return prevState.map((prev, idx) => {
-                if(idx===index){
-                    prev = false;
-                }
-                return prev;
-            })
-        })
+    const removeMessage = (index) => {
+        dispatch(remove(index))
     }
 
     return(
         <>
             <ToastContainer position='bottom-end' className='m-2'>
                 {messages.map((message, index) => {
-                    return (<Toast key={index} onClose={() => setShowStatus(index)} show={show[index]}>
+                    return (<Toast key={index} onClose={() => removeMessage(index)} show={true}>
                         <Toast.Header>
                             <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
                             <strong className="me-auto">Message</strong>

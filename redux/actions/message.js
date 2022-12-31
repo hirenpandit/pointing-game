@@ -6,3 +6,10 @@ export const messages = (msg) => dispatch =>{
         payload: msg
     })
 }
+
+export const remove  = (index) => dispatch => {
+    dispatch({
+        type: types.REMOVE_MESSAGES,
+        payload: index
+    })
+}
