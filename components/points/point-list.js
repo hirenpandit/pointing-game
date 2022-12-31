@@ -85,11 +85,11 @@ export default function PointList(){
                 {data.team}
             </div>
             <div className='card-body text-secondary'>
-            <ul class="list-group list-group-flush">
+            <ul className="list-group list-group-flush">
                 {
                     data.devs.map(
                         d => {
-                            return <li class="list-group-item" key={d.name}>
+                            return <li className="list-group-item" key={d.name}>
                                         <Point key={d.name} 
                                         player={d.name} 
                                         point={d.point} 
