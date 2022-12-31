@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import { retrieveSession } from '../../redux/actions/session'
 import { clearPoints, showPoints } from '../../lib/request'
 import socket from '../../utils/socket-utils'
+import { messages } from '../../redux/actions/message'
 
 export default function PointList(){
     const router = useRouter()
@@ -54,26 +55,27 @@ export default function PointList(){
 
         socket.on('clear-point', data=>{
             dispatch(retrieveSession(data.id))
+            dispatch(messages(`Clear votes performed by ${data.by}`))
         })
 
         socket.on('points-show', data => {
+            console.log(data)
             dispatch(retrieveSession(data.id))
+            dispatch(messages(`Show votes performed by ${data.by}`))
         })
     }
 
     const show = async (id) => {
         const by = sessionStorage.getItem('name')
-        const res = await showPoints(id, by)
-        console.log(res)
-        socket.emit('show-points', {id: id})
+        await showPoints(id, by)
+        socket.emit('show-points', {id: id, by: by})
         dispatch(retrieveSession(id))
     }
 
     const clear = async (id) => {
         const by = sessionStorage.getItem('name')
-        const res = await clearPoints(id, by)
-        console.log(res)
-        socket.emit('point-clear', {id: id})
+        await clearPoints(id, by)
+        socket.emit('point-clear', {id: id, by: by})
         dispatch(retrieveSession(id))
     }
 

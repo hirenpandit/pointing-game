@@ -3,7 +3,8 @@ import * as types from '../types'
 const initailState = {
     _id: null,
     team: null,
-    devs: []}
+    devs: []
+}
 
 const session = (state = {
     data: {...initailState, loading:true}
